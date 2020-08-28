@@ -2,8 +2,12 @@ const express=require('express');
 const mongoose=require('mongoose');
 require('dotenv/config')
 const app=express();
+const cors=require('cors')
 //IMPORT ROUTES
 const postsRoute =require('./routes/posts');
+//MIDDLEWARES
+app.use(cors())
+app.use(express.json());
 app.use('/posts',postsRoute);
 
 
@@ -16,6 +20,7 @@ app.get('/',(req,res)=>{
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECTION,
 {useNewUrlParser:true},
+
 ()=>
 console.log('Connected to db')
 );
